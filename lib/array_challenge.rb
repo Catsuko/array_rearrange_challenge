@@ -16,18 +16,7 @@ class ArrayChallenge
       blocked.merge(checked_vertices) if is_blocked
     end
 
-    results = [nil] * arr.size
-    arr.each_with_index do |n, i|
-      my_move = moves_graph.edges(i).first
-
-      if my_move != nil && !blocked.include?(my_move)
-        results[my_move] = n
-      elsif results[i] == nil
-        results[i] = n
-      end
-    end
-
-    results
+    construct_results(arr, blocked, moves_graph)
   end
 
 private
@@ -63,5 +52,19 @@ private
     end
   EOF
 
+  def construct_results(arr, blocked, moves_graph)
+    results = [nil] * arr.size
+    arr.each_with_index do |n, i|
+      my_move = moves_graph.edges(i).first
+
+      if my_move != nil && !blocked.include?(my_move)
+        results[my_move] = n
+      elsif results[i] == nil
+        results[i] = n
+      end
+    end
+
+    results 
+  end
 
 end
