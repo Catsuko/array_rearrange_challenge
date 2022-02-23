@@ -2,12 +2,12 @@
 
 ## Description
 
-Write a function that accepts the two arguments, `arr` and `offset`:
+Write a function that accepts two arguments, `arr` and `offset`:
 
 - `arr` and `offset` are both arrays containing `N` elements where `N` is greater than 0
 - `offset` contains only integer values
 
-The function should return an array where each value in `arr` is shifted by the amount given at the same index in `offset`.
+The function should return an array where each non `nil` value in `arr` is shifted by the amount given at the same index in `offset`.
 
 ```ruby
 arr = [1, nil, nil]
