@@ -1,2 +1,5 @@
-# array_rearrange_challenge
-Coding challenge to implement a function for rearranging items in an array!
+# Array Rearrange Challenge
+
+## TODO
+
+Summary
