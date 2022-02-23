@@ -111,11 +111,11 @@ RSpec.describe 'rearrange array' do
     [10, 100, 1000, 10000, 100_000].each do |n|
 
       context "n = #{n}" do
-        let(:base_arr) { n.times.to_a }
-        let(:arr) { base_arr + [nil] }
+        let!(:base_arr) { n.times.to_a }
+        let!(:arr) { base_arr + [nil] }
     
         context 'offsets by 1' do
-          let(:offset) { [1] * arr.size }
+          let!(:offset) { [1] * arr.size }
 
           it "correct before timeout" do
             Timeout::timeout(seconds_allowed) { is_expected.to eq [nil] + base_arr }
@@ -123,7 +123,7 @@ RSpec.describe 'rearrange array' do
         end
 
         context 'offsets by -1' do
-          let(:offset) { [-1] * arr.size }
+          let!(:offset) { [-1] * arr.size }
 
           it "correct before timeout" do
             Timeout::timeout(seconds_allowed) { is_expected.to eq arr }
