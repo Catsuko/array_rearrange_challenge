@@ -1,5 +1,6 @@
 require 'set'
 
+# OPTIMIZATION: allow only zero and positive integers and replace Sets with bitmasks?
 class DirectedGraph
 
   def initialize(adjacency_list = {})
