@@ -24,7 +24,7 @@ Values can only be shifted if the shifted index is in range and no other integer
 arr = [1, nil, 2]
 offset = [1, 0, -1]
 # offset[0] and offset[2] cancel out because they would move items to the same index
-result = [1, 0, 2]
+result = [1, nil, 2]
 
 arr = [1, 2, nil]
 offset = [1, -1, 0]
