@@ -1,9 +1,9 @@
 require 'spec_helper'
 require 'timeout'
-require 'my_solution'
+require 'array_challenge'
 
 RSpec.describe 'rearrange array' do
-  subject { MySolution.rearrange(arr, offset) }
+  subject { ArrayChallenge.new.rearrange(arr, offset) }
 
   context '[1, nil, nil]' do
     let(:arr) { [1, nil, nil] }
