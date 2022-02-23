@@ -49,32 +49,6 @@ RSpec.describe DirectedGraph do
     end
   end
 
-  describe '#dfs' do
-    let(:graph) { described_class.new(5.times.to_a) }
-
-    context 'no edges' do
-      it 'from 0 finds nothing' do
-        expect(graph.dfs(0) { |n| true }).to eq nil
-      end
-    end
-
-    context 'edge from 1 to 2' do
-      before do
-        graph.add_edge(1, 2)
-      end
-
-      [0, 2, 4].each do |n|
-        it "from #{n} finds nothing" do
-          expect(graph.dfs(n) { |n| true }).to eq nil
-        end
-      end
-
-      it 'from 1 finds 2' do
-        expect(graph.dfs(1) { |n| true }).to eq 2
-      end
-    end
-  end
-
   describe '#reverse_edges' do
     let(:graph) do
       described_class.new(

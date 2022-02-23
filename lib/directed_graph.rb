@@ -2,18 +2,12 @@ require 'set'
 
 class DirectedGraph
 
-  include Enumerable
-
   def initialize(adjacency_list = {})
     @adjacency_list = if adjacency_list.is_a?(Array)
       adjacency_list.map { |item| [item, Set.new] }.to_h
     else
       adjacency_list.transform_values(&:to_set)
     end
-  end
-
-  def each(&block)
-    vertices.each(block)
   end
 
   def connected_vertices
@@ -61,21 +55,6 @@ class DirectedGraph
         edges.each { |edge| reversed_graph.add_edge(edge, vertex) }
       end
     end
-  end
-
-  def dfs(v, discovered = Set.new, &block)
-    discovered << v
-    edges(v).each do |next_v|
-      next if discovered.include?(next_v)
-
-      if block.call(next_v)
-        return next_v
-      else
-        dfs(next_v, discovered, &block)
-      end
-    end
-
-    nil
   end
 
 private
