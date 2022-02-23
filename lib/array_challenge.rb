@@ -53,18 +53,17 @@ private
   EOF
 
   def construct_results(arr, blocked, moves_graph)
-    results = [nil] * arr.size
-    arr.each_with_index do |n, i|
-      my_move = moves_graph.edges(i).first
+    Array.new(arr.size).tap do |results|
+      arr.each_with_index do |n, i|
+        my_move = moves_graph.edges(i).first
 
-      if my_move != nil && !blocked.include?(my_move)
-        results[my_move] = n
-      elsif results[i] == nil
-        results[i] = n
+        if my_move != nil && !blocked.include?(my_move)
+          results[my_move] = n
+        elsif results[i] == nil
+          results[i] = n
+        end
       end
     end
-
-    results 
   end
 
 end
