@@ -18,7 +18,8 @@ offset = [1, 0, 0]
 result = [nil, 1, nil]
 ```
 
-Values can only be shifted if the shifted index is in range and no other integer value occupies or would occupy the position after moves are made.
+Two values cannot be shifted into the same index nor can a value be shifted to an index that is already occupied by a
+non `nil` value that will not be moved.
 
 ```ruby
 arr = [1, nil, 2]
