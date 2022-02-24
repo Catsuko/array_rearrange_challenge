@@ -12,7 +12,7 @@ class ArrayChallenge
     moves_to_graph.connected_vertices.each do |v|
       next if checked.include?(v)
 
-      is_blocked, checked_vertices = check_moves_from(v, arr, moves_graph, moves_to_graph)
+      is_blocked, checked_vertices = check_moves_from(v, arr, moves_graph, moves_to_graph, blocked)
       checked.merge(checked_vertices)
       blocked.merge(checked_vertices) if is_blocked
     end
@@ -42,14 +42,14 @@ private
   }
   
   RubyVM::InstructionSequence.new(<<-EOF).eval
-    def check_moves_from(i, arr, moves, moves_to, origin = nil, checked = Set.new)
+    def check_moves_from(i, arr, moves, moves_to, blocked, checked = Set.new, origin = nil)
       checked.add(i)
       return false, checked if origin == i || arr[i] == nil
-      return true, checked if moves_to.multiple_edges?(i)
+      return true, checked if blocked.include?(i) || moves_to.multiple_edges?(i)
 
       destination = moves.vertex(i)
       return true, checked if destination == nil
-      check_moves_from(destination, arr, moves, moves_to, origin || i, checked)
+      check_moves_from(destination, arr, moves, moves_to, blocked, checked, origin || i)
     end
   EOF
 

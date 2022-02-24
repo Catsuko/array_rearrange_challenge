@@ -106,7 +106,7 @@ RSpec.describe 'rearrange array' do
   end
 
   describe 'performance' do
-    let(:seconds_allowed) { 1 }
+    let(:seconds_allowed) { 3 }
 
     [10, 100, 1000, 10000, 100_000].each do |n|
 
