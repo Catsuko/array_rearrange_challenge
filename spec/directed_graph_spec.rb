@@ -25,45 +25,4 @@ RSpec.describe DirectedGraph do
     end
   end
 
-  describe '#edges' do
-    let(:list) { { 1 => [], 2 => [1] } }
-    let(:graph) { described_class.new(list) }
-    subject { graph.edges(edge) }
-
-    context 'when no edges' do
-      let(:edge) { 1 }
-
-      it { is_expected.to be_empty }
-    end
-
-    context 'when edges' do
-      let(:edge) { 2 }
-
-      it { is_expected.to eq [1].to_set }
-    end
-
-    context 'when vertex not in graph' do
-      let(:edge) { 3 }
-
-      it { is_expected.to be_empty }
-    end
-  end
-
-  describe '#reverse_edges' do
-    let(:graph) do
-      described_class.new(
-        1 => [2, 3],
-        2 => [3],
-        3 => []
-      )
-    end
-
-    it 'reverses direction of edges' do
-      reversed = graph.reverse_edges
-      expect(reversed.edges(1)).to be_empty
-      expect(reversed.edges(2)).to contain_exactly(1)
-      expect(reversed.edges(3)).to contain_exactly(1, 2)
-    end
-  end
-
 end

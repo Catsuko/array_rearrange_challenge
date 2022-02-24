@@ -1,4 +1,5 @@
 require 'directed_graph'
+require 'bitmask_graph'
 
 class ArrayChallenge
 
@@ -44,9 +45,9 @@ private
     def check_moves_from(i, arr, moves, moves_to, origin = nil, checked = Set.new)
       checked.add(i)
       return false, checked if origin == i || arr[i] == nil
-      return true, checked if moves_to.count_edges(i) != 1
+      return true, checked if moves_to.multiple_edges?(i)
 
-      destination = moves.edges(i).first
+      destination = moves.vertex(i)
       return true, checked if destination == nil
       check_moves_from(destination, arr, moves, moves_to, origin || i, checked)
     end
@@ -55,7 +56,7 @@ private
   def construct_results(arr, blocked, moves_graph)
     Array.new(arr.size).tap do |results|
       arr.each_with_index do |n, i|
-        my_move = moves_graph.edges(i).first
+        my_move = moves_graph.vertex(i)
 
         if my_move != nil && !blocked.include?(my_move)
           results[my_move] = n

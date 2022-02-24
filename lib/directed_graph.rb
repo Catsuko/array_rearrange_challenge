@@ -1,6 +1,5 @@
 require 'set'
 
-# OPTIMIZATION: allow only zero and positive integers and replace Sets with bitmasks?
 class DirectedGraph
 
   def initialize(adjacency_list = {})
@@ -38,14 +37,6 @@ class DirectedGraph
     edges(from).include?(to)
   end
 
-  def count_edges(from)
-    @adjacency_list.fetch(from).size
-  end
-
-  def edges(from)
-    @adjacency_list.fetch(from, Set.new)
-  end
-
   def vertex?(v)
     @adjacency_list.key?(v)
   end
@@ -58,7 +49,19 @@ class DirectedGraph
     end
   end
 
+  def multiple_edges?(from)
+    count_edges(from) > 1
+  end
+
+  def vertex(from)
+    edges(from).first
+  end
+
 private
+
+  def edges(from)
+    @adjacency_list.fetch(from, Set.new)
+  end
 
   def check_vertex_exists!(v)
     raise ArgumentError, "Vertex not found: #{v}" unless vertex?(v)
@@ -66,6 +69,10 @@ private
 
   def vertices
     @adjacency_list.keys
+  end
+
+  def count_edges(from)
+    @adjacency_list.fetch(from).size
   end
 
 end
