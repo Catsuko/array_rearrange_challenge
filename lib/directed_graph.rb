@@ -25,9 +25,6 @@ class DirectedGraph
   end
 
   def add_edge(from, to)
-    check_vertex_exists!(from)
-    check_vertex_exists!(to)
-
     tap do
       edges(from) << to
     end
@@ -61,10 +58,6 @@ private
 
   def edges(from)
     @adjacency_list.fetch(from, Set.new)
-  end
-
-  def check_vertex_exists!(v)
-    raise ArgumentError, "Vertex not found: #{v}" unless vertex?(v)
   end
 
   def vertices

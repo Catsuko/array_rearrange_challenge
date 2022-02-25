@@ -106,7 +106,17 @@ RSpec.describe 'rearrange array' do
   end
 
   describe 'performance' do
-    let(:seconds_allowed) { 2 }
+    let(:seconds_allowed) { 1.5 }
+
+    context 'large sparse graph' do
+      let(:base_arr) { Array.new(100000) }
+      let(:arr) { base_arr + [1] }
+      let(:offset) { [-1] * 100001 }
+
+      it "correct before timeout" do
+        Timeout::timeout(seconds_allowed) { expect(subject.last(2)).to eq [1, nil] }
+      end
+    end
 
     [10, 100, 1000, 10000, 100_000].each do |n|
 
